@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指定该Android应用的包名，
+    该包名可用于唯一地表示该应用 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dynasty.getverifycode">
+    <!-- 指定项目所需要的权限
+        该项目需要监听手机的短信 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS">
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS">
+    </uses-permission>
+    <!-- 指定项目所需要的权限
+        该项目需要访问网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 指定Android应用标签、图标 -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!-- 定义该Android应用的一个组件：Activity
+            该Activity的类为HelloWorld，并指定该Acitivity的标签 -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <!-- 指定该Activity是程序的入口 -->
+                <action android:name="android.intent.action.MAIN" />
+                <!-- 指定加载该应用时运行该Activity -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
