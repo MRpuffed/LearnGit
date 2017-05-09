@@ -9,4 +9,5 @@ public class Constant {
 
     public static String URL_Register = URL + "RegisterServlet";
     public static String URL_Login = URL + "LoginServlet";
+    public static String URL_Bankcode = URL + "GetsmsServlet";
 }

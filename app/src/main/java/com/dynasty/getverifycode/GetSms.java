@@ -9,11 +9,15 @@ import android.os.Bundle;
  */
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by Dynasty_Qin on 2017/5/8.
@@ -23,12 +27,14 @@ public class GetSms extends AppCompatActivity {
     TextView tv;
     //创建一个Handler对象
     private Handler handler;
+    private TextView tvResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //使用activity_main.xml文件定义的界面布局
         setContentView(R.layout.getsms_main);
-        tv = (TextView) findViewById(R.id.textView);
+        tv = (EditText) findViewById(R.id.textView);
         handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -36,6 +42,22 @@ public class GetSms extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 tv.setText(getSmsInPhone());
                 handler.postDelayed(this, 20000);
+            }
+        });
+
+        tvResult = (TextView) findViewById(R.id.tv_result);
+
+        Button btnGetcode = (Button) findViewById(R.id.btn_getVerifycode);
+        btnGetcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (tv.getText().toString().equals("")||tv.getText().toString() == null) {
+                    Toast.makeText(GetSms.this, "验证码为空！", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("Dynasty_Qin", "验证码不为空");
+                    getverifycode(tv.getText().toString());
+                }
             }
         });
     }
@@ -106,5 +128,11 @@ public class GetSms extends AppCompatActivity {
         }
 
         return smsBuilder.toString();
+    }
+
+    private void getverifycode(String verifycode) {
+        String bankcodeUrlStr = Constant.URL_Bankcode + "?verifycode=" + verifycode;
+        Log.e("Dynasty_Qin", bankcodeUrlStr);
+        new AsyncLoader(tvResult).execute(bankcodeUrlStr);
     }
 }

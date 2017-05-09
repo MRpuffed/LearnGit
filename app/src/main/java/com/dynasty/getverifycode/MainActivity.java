@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                    else{
+                    else if(tvResult.getText().toString().equals("code:100;message:登陆失败，密码不匹配或账号未注册")){
                         Toast.makeText(MainActivity.this, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
                     }
                 }
